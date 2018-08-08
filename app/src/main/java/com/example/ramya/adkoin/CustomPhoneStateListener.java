@@ -1,13 +1,18 @@
 package com.example.ramya.adkoin;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Parameter;
 import java.util.Random;
 
 /**
@@ -23,19 +28,26 @@ public class CustomPhoneStateListener extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
-        ImageView close;
+        Button close;
         ImageView banner;
 
-        String url[] = {
-                "https://pbs.twimg.com/profile_images/874661809139073025/X8yzIhNy_400x400.jpg",
+
+        int images[] = {
+                /*"https://pbs.twimg.com/profile_images/874661809139073025/X8yzIhNy_400x400.jpg",
                 "https://storage.googleapis.com/gd-wagtail-prod-assets/original_images/evolving_google_identity_share.jpg",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbC24wxj7HNxqtewPrOMHcbYG-TgBBqe_xPHUa8CmVuoBqGneU",
-                "https://cdn.mos.cms.futurecdn.net/2sDGvXSwDRvrJqq9YN5oc4-480-80.jpg"
+                "https://cdn.mos.cms.futurecdn.net/2sDGvXSwDRvrJqq9YN5oc4-480-80.jpg"*/
+                R.drawable.im1,
+                R.drawable.im2,
+                R.drawable.im3,
+                R.drawable.im4,
+                R.drawable.im5
+
+
         };
 
         Random rand = new Random();
-
-        int  n = rand.nextInt(3);
+        int  n = rand.nextInt(5);
 
         //try {
 //            requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -65,8 +77,9 @@ public class CustomPhoneStateListener extends Activity {
         banner = findViewById(R.id.banner);
 
         Picasso.with(this)
-                .load(url[n])
-                .resize(400,300)                       // optional
+                .load(images[n])
+                .fit()
+                //.resize(400,300)                       // optional
                 .into(banner);
 
         final DisplayMetrics dm = new DisplayMetrics();
@@ -75,20 +88,27 @@ public class CustomPhoneStateListener extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().getWindowManager().getDefaultDisplay();
-        getWindow().setBackgroundDrawable(null);
+        //getWindow().getWindowManager().getDefaultDisplay();
 
-        //getWindow().setLayout((int)(width*.8),(int)(height*.3));
+        getWindow().setLayout((int)(width*.9),(int)(height*.4));
+        //getWindow().setBackgroundDrawable(null);
+
+        
 
 
 
-        close = findViewById(R.id.close);
+
+        close = (Button) findViewById(R.id.close);
+        close.getBackground().setAlpha(50);
+        close.setTextSize(25);
+
+            close.setTextColor(Color.BLACK);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                System.exit(0);
+
+                finishAffinity();
             }
         });
 
