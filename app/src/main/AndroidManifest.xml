@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
 
 
@@ -18,14 +20,18 @@
         android:theme="@style/AppTheme">
         <receiver android:name=".PhoneStateReceiver">
             <intent-filter>
+
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".CustomPhoneStateListener">
+        <activity android:name=".CustomPhoneStateListener"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:showOnLockScreen="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">

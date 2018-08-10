@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +23,13 @@ import java.util.Random;
 
 public class CustomPhoneStateListener extends Activity {
 
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this,"Click Close button to get money",Toast.LENGTH_SHORT).show();
+        //super.onBackPressed();
+
+    }
 
 
 
@@ -91,18 +100,17 @@ public class CustomPhoneStateListener extends Activity {
         //getWindow().getWindowManager().getDefaultDisplay();
 
         getWindow().setLayout((int)(width*.9),(int)(height*.4));
-        //getWindow().setBackgroundDrawable(null);
-
-        
-
-
-
+        //  getWindow().setBackgroundDrawable(null);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         close = (Button) findViewById(R.id.close);
         close.getBackground().setAlpha(50);
         close.setTextSize(25);
-
-            close.setTextColor(Color.BLACK);
+//
+           close.setTextColor(Color.BLACK);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +119,8 @@ public class CustomPhoneStateListener extends Activity {
                 finishAffinity();
             }
         });
+
+
 
 
 
